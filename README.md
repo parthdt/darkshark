@@ -1,4 +1,4 @@
-# Packet sniffer in python :technologist:
+# Packet sniffer in python using scapy :technologist:
 ### For Networks and System Security Course
 
 ### Group Members
