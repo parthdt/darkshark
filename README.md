@@ -3,8 +3,8 @@
 
 ### Group Members
 
-* Gaurav Bansal
-* Manas Ghai
+* [Gaurav Bansal](https://github.com/GGB-21)
+* [Manas Ghai](https://github.com/manas0)
 * [Parth Thakker](https://github.com/parthdt)
 
 ### Requirements 
@@ -20,9 +20,9 @@ Read Scapy docs [here](https://scapy.readthedocs.io/)
 ### To-do:
 
 1. Make a basic packet sniffer. :heavy_check_mark:
-2. Implement UI through command line/GUI.
+2. Implement UI and menu in the command line. :hourglass_flowing_sand:
 3. Implement Berkeley Packet Filter :heavy_check_mark:
-4. Pretty Print the data
+4. Pretty Print the data :hourglass_flowing_sand:
 5. Analysis of the application layer data :heavy_check_mark:
 6. Implement printing of analysis using scapy modules
 

@@ -32,39 +32,52 @@ class Interface:
 		return self.dface
 	
 	def print_interfaces(self):   # pretty print interfaces
-		c=1
-		for i in self.interfaces:
+		print("The Interfaces available are:")
+		for c,i in enumerate(self.interfaces):
 			if(self.dface == i.name):
 				print("Interface " + str(c) + " (Default Interface) :-")
 			else:
 				print("Interface " + str(c) + " :-")
 			print("--------------------------------------")
 			i.print_interface()
-			c = c+1
+			# c = c+1
 			print()
 	
 #print introduction
 def print_intro():
 	print("Basic packet sniffer!")
+	print("--------------------------------------\n")
 	#print group members
-	#functionality as menu : list interfaces, 
+	#functionality as menu :
+    # 1. list interfaces,
+    # 2. show different bpf's, 
+    # 3. sniff packets, give options to save to a file
+    # 4. show menu again
+    # 5. ?
 	#give a good look
+
+print_intro()
 
 while True:
     i = Interface()
-    print(i.default_interface())
-   	i.print_interfaces()  #giving identation error
-    packetNumber = int(input("Enter the number of packets to be sniffed: "))
-    interface = input("Enter the interface: (leave blank if no input.) ")
-    actual_interface = i if interface == "" else interface
-    bpf = input("Enter BPF (leave blank if none.) ")
-    print("Packets captured and the data:\n")
-    p = sniff(count = packetNumber, iface = actual_interface, filter = bpf, prn = lambda x: x.show())
-    print("Summary of the packets captured:\n\n")
-    print(p.nsummary())
+    # print("Default interface is:",i.default_interface(), "\n") #Commenting out as default is shown again below.
+    i.print_interfaces()
+
+    packetNumber = input("Enter the number of packets to be sniffed: ")
+    packetNumber = 100 if not packetNumber else int(packetNumber)
+
+    interface = input("Enter the interface: (leave blank for default) ")
+    actual_interface = "eth0" if not interface else interface
+
+    bpf = input("Enter BPF (leave blank if none) ")
+
+    keyword = input("Enter a keyword to be searched in the raw data (leave blank if none) ")
     
+    print("Packets captured and the data:\n")
+    p = sniff(count = packetNumber, iface = actual_interface, filter = bpf, prn=lambda x: x.show(), lfilter = lambda x: keyword in str(x))
+    print("Summary of the packets captured:\n")
+    print(p.show())
 
     to_continue = input("Do you want to sniff more? (y/n)")
-
     if to_continue is not ("y" or "Y"):
         sys.exit(0)
