@@ -81,10 +81,14 @@ while True:
     bpf = input("Enter BPF (leave blank if none) ")
     keyword = input("Enter a keyword to be searched in the raw data (leave blank if none) ")
     
-    print("Packets captured and the data:\n")
-    p = sniff(count = packetNumber, iface = actual_interface, filter = bpf, prn=lambda x : x.show(), lfilter = lambda x: re.search(keyword,str(x)))
-    print("Summary of the packets captured:\n")
-    print(p.nsummary())
+    print("Packets captured and the data: (timeout is 10 seconds)\n")
+    p = sniff(count = packetNumber, iface = actual_interface, filter = bpf, prn=lambda x : x.show(), lfilter = lambda x: re.search(keyword,str(x)), timeout = 10
+    if p:
+        print("Summary of the packets captured:\n")
+        print(p.nsummary())
+    else:
+        if not bpf and not keyword:print("No packets sniffed, timeout reached.")
+        else:print("No packets sniffed corresponding to the bpf/keyword, timeout reached.")
 
     to_continue = input("Do you want to sniff more? (y/n)")
     if to_continue is not ("y" or "Y"):
