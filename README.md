@@ -25,5 +25,6 @@ Read Scapy docs [here](https://scapy.readthedocs.io/)
 5. Analysis of the application layer data :heavy_check_mark:
 6. Provide logging functionality :heavy_check_mark:
 7. Implement printing of analysis using scapy modules :hourglass_flowing_sand:
-8. Find/make command-line logo for DARKSHARK :hourglass_flowing_sand:
+8. Find/make command-line logo for DARKSHARK :heavy_check_mark:
+
 

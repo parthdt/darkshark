@@ -76,10 +76,19 @@ def print_intro():
 	os.system('clear')
 	for i in range (130):
 		print("-",end = "")
-	print("\n\t\t\t\t\t__/\__ Welcome to the DARKSHARK (v1.0) __/\__")
+	logo = '''
+	\t\t\t\t ___   _   ___ _  _____ _  _   _   ___ _  __
+	\t\t\t\t|   \ /_\ | _ \ |/ / __| || | /_\ | _ \ |/ /
+	\t\t\t\t| |) / _ \|   / ' <\__ \ __ |/ _ \|   / ' < 
+	\t\t\t\t|___/_/ \_\_|_\_|\_\___/_||_/_/ \_\_|_\_|\_|
+	\t\t\t\t\t\t\t\t\t     (v1.0)'''
+                                            
+	print(logo)
 	for i in range (130):
 		print("-", end = "")
-	print("\n\nGet ready to dive in the world of packet sniffing with your new buddy DARKSHARK. Developed by 3 comrades:")
+	# print("\n\t\t\t\t\t__/\__ Welcome to the DARKSHARK (v1.0) __/\__")
+	print("\n\nGet ready to dive in the world of packet sniffing with your new buddy DARKSHARK.")
+	print("Developed with \u2764 by the three comrades:")
 	print("\t-> Parth Thakker")
 	print("\t-> Gaurav Bansal")
 	print("\t-> Manas Ghai")
