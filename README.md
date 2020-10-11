@@ -1,4 +1,4 @@
-# Packet sniffer in python using scapy :technologist:
+# DARKSHARK - A Packet sniffer in python using scapy :technologist:
 ### For Networks and System Security Course
 
 ### Group Members
@@ -15,6 +15,13 @@ pip install --pre scapy[basic]
 ```
 
 Read Scapy docs [here](https://scapy.readthedocs.io/)
+
+### Usage
+
+After installing `scapy`, run:
+```bash
+python3 packet_sniffer.py
+```
 
 ### To-do:
 

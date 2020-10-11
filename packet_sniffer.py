@@ -95,7 +95,7 @@ def print_intro():
 	print("\nSpecifications:-")
 	print("------------------")
 	print("\t-> Automatically Detect available network interfaces on the device with their IP and MAC addresses.")
-	print("\t-> Shows all the TCP/IP stack layers of captured packets.")
+	print("\t-> Shows all the TCP/IP headers of captured packets.")
 	print("\t-> Supports a bunch of Berkley Packet Filters (BPFs) for smooth experience.")
 	print("\t-> Comes with Regular Expression matching and Keyword searching during sniffing.")
 	print("\t-> Supports logging of the sniffing summary.")
