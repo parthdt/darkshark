@@ -119,38 +119,43 @@ def list_interfaces():
 #option 2 of menu, giving a small tutorial on BPF's
 def list_bpf():
 	bpflist = '''Note: Berkeley Packet Filters are in lowercase.
-
 	Some examples of BPF's are:
-
 	1. To restrict to a particular protocol, just type in that protocol:
 	Example:
 	tcp
 	icmp
-
 	2. You can also filter out properties of that protocol, say the port number or the source/destination IP:
 	Examples:
 	tcp port 80 (to and fro port 80, HTTP)
 	ip host 192.168.1.1 (host ip should be 192.168.1.1)
 	tcp dst port 80(to port 80, HTTP)
-
 	3. You can also combine multiple BPF's using 'and':
 	Examples:
 	icmp[icmptype] != icmp-echo and icmp[icmptype] != icmp-echoreply (basically means no ping packets)
-
 	To know more about BPF syntax, visit this webpage:
 	'https://biot.com/capstats/bpf.html'
 	'''
 	print(bpflist)
 
+#pretty print packet
+def print_packet(packet):
+	global counter
+	print("Packet " + str(counter) + ":-")
+	print("-"*15)
+	packet.show()
+	counter += 1
+
 #option 3 of menu, capturing and sniffing packets
 def capture_packets(filecounter):
 	print("Starting Packet Sniffing: ")
 	print("--------------------------------------")
-
+	#reset packet print counter
+	global counter
+	counter = 1
 	#Get the packetnumber
 	packetNumber = 5
 	while True:
-		pn = input("Enter the number of packets to be sniffed: (Default is 5)")
+		pn = input("Enter the number of packets to be sniffed (Default is 5): ")
 		if not pn or int(pn)>0:
 			break
 		elif int(pn)<=0: print("Please enter a positive number.")
@@ -169,7 +174,7 @@ def capture_packets(filecounter):
 	#Get the BPF
 	bpf = ""
 	while True:
-		bpf = input("Enter BPF (leave blank if none) ")
+		bpf = input("Enter BPF (leave blank if none): ")
 		if not bpf:
 			break
 		else:
@@ -177,10 +182,10 @@ def capture_packets(filecounter):
 			else:print("Invalid filter! Please enter a valid one.")
 
 	#Get the regex to match in packet
-	keyword = input("Enter a keyword/regex to be searched in the raw data (leave blank if none) ")
+	keyword = input("Enter a keyword/regex to be searched in the raw data (leave blank if none): ")
     
-	print("Packets captured and the data: (timeout is 10 seconds)\n")
-	p = sniff(count = packetNumber, iface = actual_interface, filter = bpf, prn=lambda x : x.show(), lfilter = lambda x: re.search(keyword,str(x)), timeout = 10)
+	print("\nPackets captured and the data: (timeout is 10 seconds)")
+	p = sniff(count = packetNumber, iface = actual_interface, filter = bpf, prn = print_packet, lfilter = lambda x: re.search(keyword,str(x)), timeout = 10)
 
 	#If packets are captured, print and store them
 	if p:
@@ -200,7 +205,8 @@ def capture_packets(filecounter):
 				for f in list_of_files:
 					os.remove(f)
 
-		print("Summary of the packets captured:\n")
+		print("Summary of the packets captured:")
+		print("-"*40)
 		print(p.nsummary())
 
 		#Write the sniffed packets to the file
@@ -222,6 +228,7 @@ def capture_packets(filecounter):
 print_intro() #print introduction on console
 interfaces = Interface() #initialize interfaces
 filecounter = 1	#initialise counter variable for file
+counter = 1  #packet print counter
 
 #If captures directory hasn't already been created, then create it.
 if not os.path.exists("captures"):
