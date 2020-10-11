@@ -66,7 +66,7 @@ class Interface:
 
 #Function to validate a BPF, returns 1 if valid else 0
 def validate_filter(filter):
-	p = subprocess.Popen(['tcpdump','-i','eth0','-d',filter], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+	p = subprocess.Popen(['tcpdump','-i',interfaces.default_interface(),'-d',filter], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 	stdout, stderr = p.communicate()
 	if stderr:return 0
 	else:return 1
@@ -184,8 +184,8 @@ def capture_packets(filecounter):
 	#Get the regex to match in packet
 	keyword = input("Enter a keyword/regex to be searched in the raw data (leave blank if none): ")
     
-	print("\nPackets captured and the data: (timeout is 10 seconds)")
-	p = sniff(count = packetNumber, iface = actual_interface, filter = bpf, prn = print_packet, lfilter = lambda x: re.search(keyword,str(x)), timeout = 10)
+	print("\nPackets captured and the data: (timeout is 20 seconds)")
+	p = sniff(count = packetNumber, iface = actual_interface, filter = bpf, prn = print_packet, lfilter = lambda x: re.search(keyword,str(x)), timeout = 20)
 
 	#If packets are captured, print and store them
 	if p:
@@ -207,7 +207,8 @@ def capture_packets(filecounter):
 
 		print("Summary of the packets captured:")
 		print("-"*40)
-		print(p.nsummary())
+		p.nsummary()
+		print()
 
 		#Write the sniffed packets to the file
 		filename = "packet_capture_" + str(filecounter) +".pcap"
@@ -219,8 +220,8 @@ def capture_packets(filecounter):
 
 	#If no packets are captured in the timeout interval, print appropriate message.
 	else:
-	    if not bpf and not keyword:print("Timeout of 10 seconds reached, no packets sniffed.")
-	    else:print("Timeout of 10 seconds reached, no packets sniffed corresponding to the keyword/filter.")
+	    if not bpf and not keyword:print("Timeout reached, no packets sniffed.")
+	    else:print("Timeout seconds reached, no packets sniffed corresponding to the keyword/filter.")
 	 
 	return filecounter
 
