@@ -2,7 +2,6 @@
 
 #imports
 from scapy.all import *
-from scapy.layers.http import *
 import subprocess
 import os
 import glob
@@ -140,9 +139,18 @@ def list_bpf():
 #pretty print packet
 def print_packet(packet):
 	global counter
-	print("Packet " + str(counter) + ":-")
+	print("\nPacket " + str(counter) + ":-")
 	print("-"*15)
-	packet.show()
+	if packet.haslayer(TCP) and packet.haslayer(Raw):	#If packet has raw tcp data, pretty print it seperately
+		copy = packet
+		raw = str(packet[Raw]).split(r'\r\n')
+		copy[TCP].remove_payload()
+		copy.show()
+		print('###[ Raw TCP Application Data ]### \n')
+		for string in raw:
+			print("\t\t\t"+string.replace("b'","").replace('\n','').replace("'",''))
+	else:
+		packet.show()	
 	counter += 1
 
 #option 3 of menu, capturing and sniffing packets
