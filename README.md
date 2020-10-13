@@ -33,5 +33,7 @@ python3 packet_sniffer.py
 6. Provide logging functionality :heavy_check_mark:
 7. Implement printing of analysis using scapy modules :hourglass_flowing_sand:
 8. Find/make command-line logo for DARKSHARK :heavy_check_mark:
+9. Implement packet attacks as per Assignment 2 :hourglass_flowing_sand:
+
 
 
