@@ -34,6 +34,10 @@ python3 packet_sniffer.py
 7. Implement printing of analysis using scapy modules :hourglass_flowing_sand:
 8. Find/make command-line logo for DARKSHARK :heavy_check_mark:
 9. Implement packet attacks as per Assignment 2 :hourglass_flowing_sand:
+10. Find fire symbol and insert in program function "launch_attacks". :hourglass_flowing_sand:
+11. GUI menu edit to include attacks. :hourglass_flowing_sand:
+12. Add interfaces flags while printing interfaces. :hourglass_flowing_sand:
+13. Add and test HTTP decoding functionality in packet sniffer. :hourglass_flowing_sand:
 
 
 
