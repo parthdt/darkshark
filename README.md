@@ -23,6 +23,8 @@ After installing `scapy`, run:
 python3 packet_sniffer.py
 ```
 
+> Note: Archive folder is for previous darkshark versions, current latest version (v2) is `darkshark.py`.
+
 ### To-do:
 
 1. Make a basic packet sniffer. :heavy_check_mark:

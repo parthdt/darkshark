@@ -266,7 +266,7 @@ def ping_of_death():
 
 #option 4 of menu: launch attacks
 def launch_attacks():
-	print("It's time to launch attacks! (fire symbol).. Kick off by choosing one of the following:- ") #replace fire symbol with unicode
+	print("It's time to launch attacks! \u0471 \u03EA \u0471 (fire symbol).. Kick off by choosing one of the following:- ") #replace fire symbol with unicode
 	print("1. IP Smurf Attack")
 	print("2. DNS Reflection Attack")
 	print("3. DNS Amplification Attack")
