@@ -35,14 +35,16 @@ python3 packet_sniffer.py
 6. Provide logging functionality :heavy_check_mark:
 7. Implement printing of analysis using scapy modules :hourglass_flowing_sand:
 8. Find/make command-line logo for DARKSHARK :heavy_check_mark:
-9. Implement packet attacks as per Assignment 2 :hourglass_flowing_sand:
+9. Implement packet attacks as per Assignment 2 :heavy_check_mark:
 10. IP Spoofing :heavy_check_mark:
 11. IP Smurf :heavy_check_mark:
-12. DNS Reflection :hourglass_flowing_sand:
-13. DNS Amplification :hourglass_flowing_sand:
-14. TCP SYN Flooding :hourglass_flowing_sand:
+12. DNS Reflection :heavy_chark_mark:
+13. DNS Amplification :heavy_chark_mark:
+14. TCP SYN Flooding  :heavy_chark_mark:
 15. Ping of Death :heavy_check_mark:
 16. Find fire symbol and insert in program function "launch_attacks". :heavy_check_mark:
 17. GUI menu edit to include attacks. :heavy_check_mark:
 18. Add interfaces flags while printing interfaces. :hourglass_flowing_sand:
 19. Add and test HTTP decoding functionality in packet sniffer. :hourglass_flowing_sand:
+20. Divide code into modules and make a main file with imports. :hourglass_flowing_sand:
+21. Make functions for repeated code like `sys.exit'. :hourglass_flowing_sand:

