@@ -38,9 +38,9 @@ python3 packet_sniffer.py
 9. Implement packet attacks as per Assignment 2 :heavy_check_mark:
 10. IP Spoofing :heavy_check_mark:
 11. IP Smurf :heavy_check_mark:
-12. DNS Reflection :heavy_chark_mark:
-13. DNS Amplification :heavy_chark_mark:
-14. TCP SYN Flooding  :heavy_chark_mark:
+12. DNS Reflection :heavy_check_mark:
+13. DNS Amplification :heavy_check_mark:
+14. TCP SYN Flooding  :heavy_check_mark:
 15. Ping of Death :heavy_check_mark:
 16. Find fire symbol and insert in program function "launch_attacks". :heavy_check_mark:
 17. GUI menu edit to include attacks. :heavy_check_mark:
@@ -48,3 +48,5 @@ python3 packet_sniffer.py
 19. Add and test HTTP decoding functionality in packet sniffer. :hourglass_flowing_sand:
 20. Divide code into modules and make a main file with imports. :hourglass_flowing_sand:
 21. Make functions for repeated code like `sys.exit'. :hourglass_flowing_sand:
+22. Make list of nameservers for dns attacks. :hourglass_flowing_sand:
+23. Add input as domain name in attacks. :hourglass_flowing_sand:
