@@ -34,6 +34,7 @@ class Interface:
 			print("No interface detected!")
 			sys.exit(0)
 		for i in x:
+			if i=="sit0":continue		#For WSL2, ignore invalid interface
 			interface = newInterface(i,get_if_addr(i),get_if_hwaddr(i))
 			self.interfaces.append(interface)	
 	#get default interface
