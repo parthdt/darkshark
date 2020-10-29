@@ -48,5 +48,6 @@ python3 packet_sniffer.py
 19. Add and test HTTP decoding functionality in packet sniffer. :hourglass_flowing_sand:
 20. Divide code into modules and make a main file with imports. :hourglass_flowing_sand:
 21. Make functions for repeated code like `sys.exit'. :hourglass_flowing_sand:
-22. Make list of nameservers for dns attacks. :hourglass_flowing_sand:
-23. Add input as domain name in attacks. :hourglass_flowing_sand:
+22. Make list of nameservers for dns attacks. :heavy_check_mark:
+23. Add input as domain name in attacks. :heavy_check_mark:
+24. Handle ip validation using try catch in attacks. :hourglass_flowing_sand:
