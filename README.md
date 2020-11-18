@@ -23,7 +23,7 @@ After installing `scapy`, run:
 python3 packet_sniffer.py
 ```
 
-> Note: Archive folder is for previous darkshark versions, current latest version (v2) is `darkshark.py`.
+> Note: Archive folder is for previous darkshark versions, current latest version (v3) is `darkshark.py`.
 
 ### To-do:
 
@@ -51,3 +51,4 @@ python3 packet_sniffer.py
 22. Make list of nameservers for dns attacks. :heavy_check_mark:
 23. Add input as domain name in attacks. :heavy_check_mark:
 24. Handle ip validation using try catch in attacks. :hourglass_flowing_sand:
+25. Verify working of fragmented code. :hourglass_flowing_sand:
