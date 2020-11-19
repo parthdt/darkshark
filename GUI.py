@@ -2,6 +2,8 @@
 
 #Keep above line as first line always! Its a shebang
 
+import sys
+
 #print introduction
 def print_intro():
 	os.system('clear')
@@ -46,3 +48,37 @@ def print_menu():
 	4. Time for revenge(Launch Attacks) \N{smiling face with horns}
 	5. Exit'''
 	print(menu)
+
+def print_attacks_menu():
+	print("It's time to launch attacks \N{fire} Kick off by choosing one of the following:- ")
+	print("1. IP Spoofing")
+	print("2. IP Smurf Attack")
+	print("3. DNS Reflection Attack")
+	print("4. DNS Amplification Attack")
+	print("5. TCP SYN Flooding Attack")
+	print("6. Ping of Death")
+	print("7. Exit")
+
+def print_bpf_list():
+	bpflist = '''Note: Berkeley Packet Filters are in lowercase.
+	Some examples of BPF's are:
+	1. To restrict to a particular protocol, just type in that protocol:
+	Example:
+	tcp
+	icmp
+	2. You can also filter out properties of that protocol, say the port number or the source/destination IP:
+	Examples:
+	tcp port 80 (to and fro port 80, HTTP)
+	ip host 192.168.1.1 (host ip should be 192.168.1.1)
+	tcp dst port 80(to port 80, HTTP)
+	3. You can also combine multiple BPF's using 'and':
+	Examples:
+	icmp[icmptype] != icmp-echo and icmp[icmptype] != icmp-echoreply (basically means no ping packets)
+	To know more about BPF syntax, visit this webpage:
+	'https://biot.com/capstats/bpf.html'
+	'''
+	print(bpflist)
+
+def print_exit_message():
+	sys.exit("-"*130+"\n\t\t\tHope the DARKSHARK experience was smooth. Come back another time \N{shark}")
+

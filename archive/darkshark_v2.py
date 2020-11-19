@@ -326,6 +326,7 @@ def dns_reflection_attack():
 	print("-"*60)
 	
 #dns amplification attack, basically dns reflection with query type = 'ANY'
+#Add Kaminsky's Bug
 def dns_amplification_attack():
 	print("\t\t DNS Amplification Attack \N{bomb}")
 	print("-"*60)

@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 
 #Keep above line as first line always! Its a shebang
+import ipaddress
+import subprocess
 
 #Function to validate a BPF, returns 1 if valid else 0
 def validate_filter(filter):

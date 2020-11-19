@@ -5,7 +5,41 @@
 #To-do: Add Kaminsky's Bug
 
 from Helpers import *
+from GUI import *
 from scapy.all import *
+import os
+
+def launch_attacks():
+	print_attacks_menu()
+	ch=0
+	while True:  #get user input and validate
+		a = input("Enter Sr No. of your choice: ")
+		if(a == "1" or a == "2" or a == "3" or a == "4" or a == "5" or a=="6" or a=="7"):
+			ch = int(a)
+			break
+		else:
+			print("Invalid input! Please enter a valid one.")
+	#Call function according to user choice
+	if(ch == 1):
+		os.system('clear')
+		ip_spoofing()
+	elif(ch == 2):
+		os.system('clear')
+		ip_smurf_attack()
+	elif(ch==3):
+		os.system('clear')
+		dns_reflection_attack()
+	elif(ch==4):
+		os.system('clear')
+		dns_amplification_attack()
+	elif(ch==5):
+		os.system('clear')
+		tcp_synflood_attack()
+	elif(ch==6):
+		os.system('clear')
+		ping_of_death()
+	else:
+		print_exit_message()
 
 #ip spoof attack
 def ip_spoofing():
