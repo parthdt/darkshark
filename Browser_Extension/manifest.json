@@ -1,0 +1,24 @@
+{
+    "manifest_version": 2,
+    "name": "Darkshark",
+    "version": "1.0",
+    "description": "Get Ready to sniff passwords!",
+    "icons": {
+        "128": "ds128.png",
+        "48": "ds48.png",
+        "16": "ds16.png"
+    },
+    "browser_action": {
+        "default_icon": "ds16.png",
+        "default_popup": "popup.html"
+    },
+    "background": {
+        "scripts": ["sniff.js"],
+        "persistent": false
+    },
+    "permissions" : [
+        "tabs", 
+        "storage", 
+        "notifications"
+    ]
+}
