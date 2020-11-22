@@ -3,9 +3,11 @@
 #Keep above line as first line always! Its a shebang
 import ipaddress
 import subprocess
+from Interfaces import *
 
 #Function to validate a BPF, returns 1 if valid else 0
 def validate_filter(filter):
+	interfaces = Interface()
 	p = subprocess.Popen(['tcpdump','-i',interfaces.default_interface(),'-d',filter], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 	stdout, stderr = p.communicate()
 	if stderr:return 0

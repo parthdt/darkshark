@@ -1,0 +1,18 @@
+# $Id: local.rules,v 1.11 2004/07/23 20:15:44 bmc Exp $
+# ----------------
+# LOCAL RULES
+# ----------------
+# This file intentionally does not come with signatures.  Put your local
+# additions here.
+
+# Generic ICMP filter
+# alert icmp any any -> $HOME_NET any (msg:"ICMP test"; sid:10000001; rev:001;)
+
+# Reject ICMP floods (IP Smurf for example), reply will be ICMP response dest unreachable
+reject icmp any any -> $HOME_NET any (msg:"ICMP flood"; sid:1; rev:2; classtype:icmp-event; detection_filter:track by_dst, count 100, seconds 1;)
+
+# Reject TCP SYN Floods, with response as a TCP flag with RST Flag set.
+reject tcp any any -> $HOME_NET 80 (flags: S; msg:"Possible TCP SYN Flood"; flow:stateless; sid:2; rev:2; detection_filter:track by_dst, count 20, seconds 10;)
+
+# Reject if too many DNS Responses (Flood)
+reject udp any any -> $HOME_NET 53 (msg: "Multiple DNS responses"; sid:3; rev:2; detection_filter:track by_dst, count 5, seconds 1;)
