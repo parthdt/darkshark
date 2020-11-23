@@ -1,13 +1,23 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Darkshark</title>
+        <title>Font Style</title>
         <script src="jquery-3.5.1.min.js"></script> 
-        <link rel="stylesheet" type="text/css" href="style.css">
+        <script src="jscolor.js"></script>
+        <script src="popup.js"></script>
+        <style>
+            h2{
+                color: blue;
+            }
+            body{
+                min-width: 350px;
+                min-height: 200px;
+            }
+        </style>
     </head>
     <body>
-        <h2>Darkshark!!</h2>
-        <input type="submit" id="sniffPassword" value="Sniff Password">
-        <input type="submit" id="genTraffic" value="Generate Traffic"> 
+        <h2>Color Picker</h2>
+        <input type="text" id="fontColor" value="#FFCC00" data-jscolor=""/>
+        <input type="submit" id="btnChange" value="Change"/> 
     </body>
 </html>
