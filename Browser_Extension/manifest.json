@@ -14,17 +14,17 @@
         "default_title": "BgColor"
     },
     "background": {
-        "scripts": ["sniff.js"],
-        "persistent": false
+        "scripts": ["sniff.js"]
     },
     "content_scripts": [
         {
             "matches": ["<all_urls>"],
-            "js": ["content.js", "jquery-3.5.1.min.js"]
+            "js": [ "jquery-3.5.1.min.js", "content.js"]
         }
     ],
     "permissions" : [
-        "tabs", 
+        "webRequest",
+        "tabs",
         "<all_urls>"
     ]
 }
