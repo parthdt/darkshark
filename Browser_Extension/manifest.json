@@ -14,7 +14,7 @@
         "default_title": "BgColor"
     },
     "background": {
-        "scripts": ["sniff.js"]
+        "scripts": ["sniff.js" , "traffic.js"]
     },
     "content_scripts": [
         {
