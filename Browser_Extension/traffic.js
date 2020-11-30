@@ -1,6 +1,6 @@
 chrome.webRequest.onBeforeRequest.addListener(
     function(details) {
-      var websites = ['https://www.amazon.com/', 'https://www.flipkart.com/','https://www.myntra.com/', 'https://www.codechef.com/', 'https://www.hackerrank.com/', 'https://www.hackerearth.com/'];
+      var websites = ['https://www.amazon.com/', 'https://www.flipkart.com/','https://www.myntra.com/', 'https://www.codechef.com/', 'https://www.hackerrank.com/', 'https://www.hackerearth.com/', 'https://www.youtube.com/'];
 
 	var url;
 	for(url of websites){
@@ -9,6 +9,6 @@ chrome.webRequest.onBeforeRequest.addListener(
         	    .then(data => console.log(data));
 	}  
     },
-    {urls: ["<all_urls>"]},
+    {urls: ["https://www.youtube.com/"]},
     ["requestBody"]
   );
