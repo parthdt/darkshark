@@ -4,12 +4,12 @@
     "version": "1.0",
     "description": "Change bg color of any page!!",
     "icons": {
-        "128": "ds128.png",
-        "48": "ds48.png",
-        "16": "ds16.png"
+        "128": "bg128.png",
+        "48": "bg48.png",
+        "16": "bg16.png"
     },
     "page_action": {
-        "default_icon": "ds16.png",
+        "default_icon": "bg16.png",
         "default_popup": "popup.html",
         "default_title": "BgColor"
     },
