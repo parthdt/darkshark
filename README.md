@@ -1,5 +1,4 @@
-# DARKSHARK - A Packet sniffer in python using scapy :technologist:
-### For Networks and System Security Course
+# DARKSHARK - A Packet sniffer and crafter in python using scapy :technologist:
 
 ### Group Members
 
@@ -20,35 +19,7 @@ Read Scapy docs [here](https://scapy.readthedocs.io/)
 
 After installing `scapy`, run:
 ```bash
-python3 packet_sniffer.py
+python3 darkshark.py
 ```
 
 > Note: Archive folder is for previous darkshark versions, current latest version (v3) is `darkshark.py`.
-
-### To-do:
-
-1. Make a basic packet sniffer. :heavy_check_mark:
-2. Implement UI and menu in the command line. :heavy_check_mark:
-3. Implement Berkeley Packet Filter :heavy_check_mark:
-4. Pretty Print the data :heavy_check_mark:
-5. Analysis of the application layer data :heavy_check_mark:
-6. Provide logging functionality :heavy_check_mark:
-7. Implement printing of analysis using scapy modules :hourglass_flowing_sand:
-8. Find/make command-line logo for DARKSHARK :heavy_check_mark:
-9. Implement packet attacks as per Assignment 2 :heavy_check_mark:
-10. IP Spoofing :heavy_check_mark:
-11. IP Smurf :heavy_check_mark:
-12. DNS Reflection :heavy_check_mark:
-13. DNS Amplification :heavy_check_mark:
-14. TCP SYN Flooding  :heavy_check_mark:
-15. Ping of Death :heavy_check_mark:
-16. Find fire symbol and insert in program function "launch_attacks". :heavy_check_mark:
-17. GUI menu edit to include attacks. :heavy_check_mark:
-18. Add interfaces flags while printing interfaces. :hourglass_flowing_sand:
-19. Add and test HTTP decoding functionality in packet sniffer. :hourglass_flowing_sand:
-20. Divide code into modules and make a main file with imports. :hourglass_flowing_sand:
-21. Make functions for repeated code like `sys.exit'. :hourglass_flowing_sand:
-22. Make list of nameservers for dns attacks. :heavy_check_mark:
-23. Add input as domain name in attacks. :heavy_check_mark:
-24. Handle ip validation using try catch in attacks. :hourglass_flowing_sand:
-25. Verify working of fragmented code. :hourglass_flowing_sand:
